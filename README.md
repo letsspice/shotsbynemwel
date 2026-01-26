@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shots by Nemwel 📸🏔️
 
-## Getting Started
+**Shots by Nemwel** is a personal brand and website focused on documenting hiking experiences, landscapes, and outdoor storytelling through short-form video and photography.
 
-First, run the development server:
+The platform complements my content on **TikTok** and **Instagram**, serving as a home for curated visuals, stories from the trail, and future long-form content.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Purpose
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This website exists to:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Showcase hiking journeys and outdoor photography
+- Tell stories behind the hikes, locations, and moments
+- Act as a central home for content shared across social platforms
+- Experiment with visual storytelling on the web
 
-## Learn More
+This is an evolving project and will grow alongside the brand.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **pnpm** for package management
 
-## Deploy on Vercel
+The stack is intentionally modern, fast, and minimal to keep focus on content and performance.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design & UX
+
+The design and user experience are crafted in collaboration with  
+**Rachael** - an incredible UI/UX designer transitioning into product design.
+
+Her work shapes the visual direction, layout decisions, and overall feel of the site.
+
+> Design by **[Rachael](https://www.linkedin.com/in/rachaelngotho/)** 🎨  
+> Engineering by **[Nemwel](https://www.linkedin.com/in/nemwel-nyandoro/)** 🛠️
+
+---
+
+## Status
+
+🚧 **Work in progress**
+
+Features, layouts, and content will evolve over time as hikes, ideas, and experiments continue.
+
+---
+
+## Author
+
+**Nemwel Boniface**  
+Hiker • Builder • Storyteller
+
+- TikTok: [Link](https://www.tiktok.com/@shotsbynemwel)
+- Instagram: [Link](https://www.instagram.com/shotbynemwel/)
+
+---
+
+> Built with love for the mountains, the trail, and the moments in between.
