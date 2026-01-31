@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Cormorant_Garamond,
   Inter,
@@ -29,6 +29,11 @@ export const metadata: Metadata = {
   title: "Shots by Nemwel - Hiking Stories & Outdoor Photography",
   description:
     "A curated home for Nemwel’s hiking journeys, landscapes, and short-form storytelling - trail stories, visuals, and experiments across web, TikTok, and Instagram.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

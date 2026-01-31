@@ -238,3 +238,10 @@ body {
   line-height: 32px;
   color: var(--color-offwhite);
 }
+
+/* App Canvas: maintain a 16:9 aspect that fits viewport */
+.app-canvas-16-9 {
+  inline-size: min(100vw, calc(100vh * 16 / 9));
+  block-size: min(100vh, calc(100vw * 9 / 16));
+  margin-inline: auto;
+}
