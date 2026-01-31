@@ -1,26 +1,240 @@
 @import "tailwindcss";
 
+/* Theme variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8F9FB;
+  --foreground: #222222;
 }
 
+/* Tailwind v4 CSS-first theme tokens */
 @theme inline {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #34542C;
+  --color-accent-green: #5C934E;
+  --color-offwhite: #F9F9F7;
+  --color-dark: #0F1115;
+  --color-body: #222222;
+  --color-border: #E5E7EB;
+  --color-accent-red: #E2725B;
+  --color-black: #000000;
+
+  /* Fonts */
+  --font-serif: var(--font-cormorant);
+  --font-inter: var(--font-inter);
+  --font-manrope: var(--font-manrope);
+
+  /* Spacing */
+  --spacing-section-y: 70px;
+  --spacing-section-x: 100px;
+
+  /* Radii */
+  --radius-tab: 24px;
+  --radius-card: 24px;
+  --radius-image-a: 16px;
+  --radius-image-b: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base */
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: color-mix(in oklab, var(--color-body), transparent 25%);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, -apple-system,
+    Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+/* Header & Navigation */
+.logo {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 25px;
+  color: var(--color-offwhite);
+}
+
+.nav-item {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--color-offwhite);
+}
+
+.hero-overlay-40 {
+  background: color-mix(in oklab, #000, transparent 60%);
+}
+
+/* Hero / Main Heading */
+.hero-heading-1 {
+  font-family: var(--font-serif), serif;
+  font-weight: 700;
+  font-size: 80px;
+  line-height: 80px;
+  color: var(--color-offwhite);
+}
+
+.hero-heading-2 {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 80px;
+  line-height: 80px;
+  color: var(--color-offwhite);
+}
+
+.hero-paragraph {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  color: var(--color-offwhite);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Section Typography */
+.subheading-bold {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: -0.0128em;
+}
+
+.subheading-italic {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 64px;
+  letter-spacing: 0.002em;
+}
+
+.body-standard {
+  font-family: var(--font-manrope), sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 32px;
+  color: color-mix(in oklab, var(--color-body), transparent 25%);
+}
+
+.section-pad {
+  padding-block: var(--spacing-section-y);
+  padding-inline: var(--spacing-section-x);
+}
+
+/* Tab & Card Components */
+.tab-container {
+  width: 1238px;
+  height: 520px;
+  border-radius: var(--radius-tab);
+  overflow: hidden;
+}
+
+.tab-gradient {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, #000, transparent 60%) 0%,
+    #848484 100%
+  );
+}
+
+.tab-title {
+  font-family: var(--font-serif), serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 36px;
+  letter-spacing: -0.0128em;
+  color: var(--color-background);
+}
+
+.tab-subtitle {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.difficulty-high {
+  background-color: var(--color-accent-red);
+}
+
+.difficulty-low {
+  background-color: color-mix(in oklab, var(--color-border), transparent 10%);
+}
+
+.btn-secondary {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-accent-green);
+  gap: 18px;
+}
+
+.btn-secondary.md {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Image Gradients & Effects */
+.image-gradient-a {
+  border-radius: var(--radius-image-a);
+  background: linear-gradient(180deg, #000 100%, #000 0%);
+  opacity: 0.6;
+}
+
+.image-gradient-b {
+  border-radius: var(--radius-image-b);
+  background: linear-gradient(180deg, #000 100%, #000 0%);
+  opacity: 0.9;
+}
+
+.footer-image-wrap-bottom {
+  background: linear-gradient(
+    180deg,
+    #766636 90%,
+    #6D643E 30%,
+    #595640 0%
+  );
+}
+
+.footer-image-wrap-top {
+  background: linear-gradient(
+    180deg,
+    #1E1E1E 55%,
+    #F8F9FB 70%,
+    #F8F9FB 100%
+  );
+}
+
+/* Footer */
+.footer-link {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32.4px;
+  color: var(--color-offwhite);
+}
+
+.footer-divider {
+  height: 1px;
+  background-color: color-mix(in oklab, var(--color-border), transparent 10%);
+}
+
+.footer-copy {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: var(--color-offwhite);
 }
