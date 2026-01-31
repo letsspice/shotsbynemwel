@@ -23,7 +23,7 @@ export default function Hero() {
         {/* Navigation */}
         <nav className="flex items-center justify-between px-6 py-6 md:px-section-x">
           <div className="logo">
-            Shot by Nemwel
+            Shots by Nemwel
           </div>
 
           <ul className="hidden gap-8 md:flex">
