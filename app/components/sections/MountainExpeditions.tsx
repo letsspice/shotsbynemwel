@@ -45,6 +45,16 @@ export default function MountainExpeditions() {
             aria-hidden="true"
           />
 
+          {/* Gradient Overlay: #000000 at 67% -> #848484 at 100%
+          <div
+            className="absolute inset-0 z-10 pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 67%, #848484 100%)",
+            }}
+            aria-hidden="true"
+          /> */}
+          
           {/* 3. Foreground Content */}
           <div className="relative z-20 h-full flex flex-col justify-center px-[20px] md:px-[60px]">
             <div className="">
