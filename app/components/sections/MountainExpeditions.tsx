@@ -11,7 +11,7 @@ export default function MountainExpeditions() {
   const expedition = mountainExpeditions[activeIndex];
 
   return (
-    <section className="bg-background pb-[70px] px-[20px] md:px-[100px] w-full overflow-hidden">
+    <section id="expeditions" className="bg-background pb-[70px] px-[20px] md:px-[100px] w-full overflow-hidden">
       {/* Container to prevent overflow while maintaining design width */}
       <div className="max-w-[1238px] mx-auto w-full">
         

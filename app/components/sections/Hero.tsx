@@ -22,16 +22,16 @@ export default function Hero() {
       <div className="relative z-10 flex min-h-[90vh] flex-col">
         {/* Navigation */}
         <nav className="flex items-center justify-between px-6 py-6 md:px-section-x">
-          <div className="logo">
+          <Link href="/" className="logo">
             Shots by Nemwel
-          </div>
+          </Link>
 
           <ul className="hidden gap-8 md:flex">
             {["Expeditions", "Gallery", "Trail Notes", "Contact"].map(
               (item) => (
                 <li key={item}>
                   <Link
-                    href="#"
+                    href={`#${item.toLowerCase().replace(" ", "-")}`}
                     className="nav-item transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-offwhite"
                   >
                     {item}
