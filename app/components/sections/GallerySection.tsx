@@ -7,7 +7,7 @@ import { galleryItems } from "@/app/data/gallery";
 
 export default function GallerySection() {
   return (
-    <section className="bg-background pb-section-y px-6 md:px-section-x w-full overflow-hidden">
+    <section id="gallery" className="bg-background pb-section-y px-6 md:px-section-x w-full overflow-hidden">
       <div className="max-w-[1238px] mx-auto">
         
         {/* 1. Header Section */}
@@ -16,7 +16,7 @@ export default function GallerySection() {
             <span className="subheading-bold text-dark">Trail</span>
             <span className="subheading-italic text-dark">Gallery</span>
           </h2>
-          <p className="max-w-[420px] font-manrope text-[20px] leading-[32px] text-body opacity-75">
+          <p className="max-w-[480px] font-manrope text-[20px] leading-[32px] text-body opacity-75">
             Moments captured along the trails that tell the story of East Africa’s majestic landscapes and the journey to conquer them.
           </p>
         </div>
