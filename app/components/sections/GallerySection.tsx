@@ -65,6 +65,8 @@ function GalleryCard({ item, isTall = false }: { item: any, isTall?: boolean }) 
   return (
     <Link 
       href={`/gallery/${item.slug}`}
+      onClick={(e) => e.preventDefault()}
+      aria-disabled="true"
       className={`relative w-full overflow-hidden rounded-[16px] group block ${
         isTall ? "h-[450px] md:h-[624px]" : "h-[250px] md:h-[300px]"
       }`}

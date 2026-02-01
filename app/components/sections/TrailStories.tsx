@@ -61,6 +61,8 @@ function StoryCard({ story }: { story: any }) {
   return (
     <Link 
       href={`/blog/${story.slug}`}
+      onClick={(e) => e.preventDefault()}
+      aria-disabled="true"
       className="relative w-full h-[400px] md:h-[480px] overflow-hidden rounded-[24px] group block"
     >
       {/* Featured Image */}
