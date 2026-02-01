@@ -105,6 +105,8 @@ export default function MountainExpeditions() {
                 className="btn-secondary inline-flex items-center group"
                 style={{ gap: "18px", color: "#5C934E" }}
                 aria-label={`View expedition ${expedition.name}`}
+                onClick={(e) => e.preventDefault()}
+                aria-disabled="true"
               >
                 <span className="font-semibold text-[16px] leading-[20px]">View Expedition</span>
                 <ArrowRight 
