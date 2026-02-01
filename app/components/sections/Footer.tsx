@@ -8,6 +8,7 @@ import { Instagram } from "lucide-react";
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const year = new Date().getFullYear();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full overflow-hidden bg-background">
+    <footer id="contact" className="relative w-full overflow-hidden bg-background">
       {/* 1. Background & Multi-Layered Gradients */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -111,7 +112,7 @@ export default function Footer() {
               {['Expeditions', 'Gallery', 'Trail Notes', 'Contact'].map((item) => (
                 <Link 
                   key={item} 
-                  href={`/${item.toLowerCase().replace(' ', '-')}`}
+                  href={`#${item.toLowerCase().replace(' ', '-')}`}
                   className="font-inter font-normal text-[18px] leading-[32.4px] text-offwhite hover:text-accent-green transition-colors"
                 >
                   {item}
@@ -137,10 +138,10 @@ export default function Footer() {
           {/* Attributions */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-inter font-normal text-[18px] leading-[32px] text-offwhite">
-              © 2026 Shot by Nemwel, All Rights Reserved
+              © {year} Shots by Nemwel, All Rights Reserved
             </p>
             <p className="font-inter font-normal text-[18px] leading-[32px] text-offwhite">
-              Designed by <span className="underline decoration-1 underline-offset-4">Rachael</span>, Developed by <span className="underline decoration-1 underline-offset-4">Nemwel</span>
+              Designed by <Link href="https://www.linkedin.com/in/rachaelngotho/" className="underline decoration-1 underline-offset-4" target="_blank">Rachael</Link>, Developed by <Link href="https://www.linkedin.com/in/nemwel-nyandoro/" className="underline decoration-1 underline-offset-4" target="_blank">Nemwel</Link>
             </p>
           </div>
         </div>
