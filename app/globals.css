@@ -25,7 +25,7 @@
   --font-inter: var(--font-inter);
   --font-manrope: var(--font-manrope);
 
-  /* Spacing */
+  /* Spacing - Set to your original Desktop defaults */
   --spacing-section-y: 70px;
   --spacing-section-x: 100px;
 
@@ -34,6 +34,14 @@
   --radius-card: 24px;
   --radius-image-a: 16px;
   --radius-image-b: 24px;
+}
+
+/* Responsive Overrides: Scale DOWN for mobile, maintain original for desktop */
+@media (max-width: 767px) {
+  :root {
+    --spacing-section-y: 40px;
+    --spacing-section-x: 24px;
+  }
 }
 
 /* Base */
@@ -66,12 +74,12 @@ body {
   background: color-mix(in oklab, #000, transparent 60%);
 }
 
-/* Hero / Main Heading */
+/* Hero / Main Heading - Desktop Original (80px) / Mobile Scaled (36px) */
 .hero-heading-1 {
   font-family: var(--font-serif), serif;
   font-weight: 700;
-  font-size: 80px;
-  line-height: 80px;
+  font-size: 36px;
+  line-height: 1.1;
   color: var(--color-offwhite);
 }
 
@@ -79,17 +87,31 @@ body {
   font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 500;
-  font-size: 80px;
-  line-height: 80px;
+  font-size: 36px;
+  line-height: 1.1;
   color: var(--color-offwhite);
+}
+
+@media (min-width: 768px) {
+  .hero-heading-1, .hero-heading-2 {
+    font-size: 80px;
+    line-height: 80px;
+  }
 }
 
 .hero-paragraph {
   font-family: var(--font-manrope), sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 24px;
   color: var(--color-offwhite);
+}
+
+@media (min-width: 768px) {
+  .hero-paragraph {
+    font-size: 20px;
+    line-height: 32px;
+  }
 }
 
 .btn-primary {
@@ -99,14 +121,15 @@ body {
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  cursor: pointer;
 }
 
 /* Section Typography */
 .subheading-bold {
   font-family: var(--font-manrope), sans-serif;
   font-weight: 700;
-  font-size: 48px;
-  line-height: 60px;
+  font-size: 28px;
+  line-height: 36px;
   letter-spacing: -0.0128em;
 }
 
@@ -114,17 +137,35 @@ body {
   font-family: var(--font-serif), serif;
   font-style: italic;
   font-weight: 400;
-  font-size: 52px;
-  line-height: 64px;
+  font-size: 32px;
+  line-height: 40px;
   letter-spacing: 0.002em;
+}
+
+@media (min-width: 768px) {
+  .subheading-bold {
+    font-size: 48px;
+    line-height: 60px;
+  }
+  .subheading-italic {
+    font-size: 52px;
+    line-height: 64px;
+  }
 }
 
 .body-standard {
   font-family: var(--font-manrope), sans-serif;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 16px;
+  line-height: 24px;
   color: color-mix(in oklab, var(--color-body), transparent 25%);
+}
+
+@media (min-width: 768px) {
+  .body-standard {
+    font-size: 20px;
+    line-height: 32px;
+  }
 }
 
 .section-pad {
@@ -134,10 +175,19 @@ body {
 
 /* Tab & Card Components */
 .tab-container {
-  width: 1238px;
-  height: 520px;
+  width: 100%;
+  max-width: 1238px;
+  height: auto;
+  min-height: 520px;
   border-radius: var(--radius-tab);
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .tab-container {
+    width: 1238px;
+    height: 520px;
+  }
 }
 
 .tab-gradient {
@@ -151,10 +201,17 @@ body {
 .tab-title {
   font-family: var(--font-serif), serif;
   font-weight: 700;
-  font-size: 32px;
-  line-height: 36px;
+  font-size: 26px;
+  line-height: 30px;
   letter-spacing: -0.0128em;
   color: var(--color-background);
+}
+
+@media (min-width: 768px) {
+  .tab-title {
+    font-size: 32px;
+    line-height: 36px;
+  }
 }
 
 .tab-subtitle {
@@ -179,6 +236,7 @@ body {
   line-height: 20px;
   color: var(--color-accent-green);
   gap: 18px;
+  cursor: pointer;
 }
 
 .btn-secondary.md {
@@ -221,9 +279,17 @@ body {
 .footer-link {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 32.4px;
+  font-size: 16px;
+  line-height: 28px;
   color: var(--color-offwhite);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .footer-link {
+    font-size: 18px;
+    line-height: 32.4px;
+  }
 }
 
 .footer-divider {
@@ -234,9 +300,16 @@ body {
 .footer-copy {
   font-family: var(--font-inter), sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 32px;
+  font-size: 14px;
+  line-height: 24px;
   color: var(--color-offwhite);
+}
+
+@media (min-width: 768px) {
+  .footer-copy {
+    font-size: 18px;
+    line-height: 32px;
+  }
 }
 
 /* App Canvas: maintain a 16:9 aspect that fits viewport */
