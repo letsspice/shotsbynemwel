@@ -100,7 +100,7 @@ export default function Hero() {
             </p>
 
             <Link
-              href="#"
+              href="#expeditions"
               className="btn-primary inline-flex items-center gap-3 rounded-md px-6 py-3 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-offwhite"
             >
               View Expeditions 
