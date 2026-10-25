@@ -1,143 +1,128 @@
 "use client";
-import React, { useState } from "react";
+
+import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Instagram } from "lucide-react";
+import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/site";
+import SectionHeading from "@/app/components/ui/SectionHeading";
 
+/**
+ * Designer: heading 48/60 + 52/64, paragraph Manrope 20/32 #222 at 75%, input 1px #222 border with
+ * Inter 18/24 text at 75%, button #5C934E with Inter medium 18/24 #F8F9FB, links Inter 18/32.4,
+ * social icons 20×20, divider 1px #E5E7EB at 90%, attributions Inter 18/32.
+ */
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const year = new Date().getFullYear();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!email) {
-      setError("Email is required");
-      return;
-    }
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("Please enter a valid email address");
-      return;
-    }
+    if (!email) return setError("Email is required");
+    if (!/\S+@\S+\.\S+/.test(email)) return setError("Please enter a valid email address");
     setError("");
   };
 
   return (
     <footer id="contact" className="relative w-full overflow-hidden bg-background">
-      {/* 1. Background & Multi-Layered Gradients */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/footer/mountain-footer-bg.png"
-          alt="Mountain landscape"
-          fill
-          className="object-cover object-bottom" // Focused on the base of the mountains
-          priority
-        />
-        
-        {/* TOP GRADIENT: The "Mist" that clears at the middle - Adjusted for mobile blend */}
-        <div 
-          className="absolute inset-0 z-10"
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <Image src="/assets/footer/mountain-footer-bg.png" alt="" fill className="object-cover object-bottom" sizes="100vw" />
+        <div
+          className="absolute inset-0"
           style={{
-            background: "linear-gradient(180deg, #F8F9FB 0%, #F8F9FB 15%, rgba(248, 249, 251, 0.8) 30%, rgba(248, 249, 251, 0) 50%)"
+            background:
+              "linear-gradient(180deg, #F8F9FB 0%, #F8F9FB 22%, rgba(248,249,251,0.85) 40%, rgba(248,249,251,0.35) 58%, rgba(248,249,251,0) 72%)",
           }}
         />
-        {/* BOTTOM GRADIENT: Subtle Olive Wrap for text legibility */}
-        <div 
-          className="absolute inset-0 z-20"
+        <div
+          className="absolute inset-0"
           style={{
-            background: "linear-gradient(0deg, rgba(15, 17, 21, 0.95) 0%, rgba(15, 17, 21, 0.6) 25%, rgba(15, 17, 21, 0) 60%)"
+            background:
+              "linear-gradient(0deg, rgba(118,102,54,0.9) 0%, rgba(109,100,62,0.55) 22%, rgba(89,86,64,0) 50%)",
           }}
         />
       </div>
 
-      {/* 2. Content Layer */}
-      <div className="relative z-30 px-6 md:px-[100px] pt-[80px] md:pt-[140px] pb-[40px]">
-        <div className="max-w-[1238px] mx-auto">
-          
-          {/* Newsletter Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-[80px] md:mb-[160px] items-start">
-            <div>
-              <h2 className="tracking-[-0.0128em]">
-                <span className="font-manrope font-bold text-[36px] md:text-[48px] leading-[44px] md:leading-[60px] text-dark block md:inline">
-                  Trail notes{" "}
-                </span>
-                <span className="font-serif italic font-normal text-[40px] md:text-[52px] leading-[48px] md:leading-[64px] text-dark tracking-[0.002em]">
-                  Delivered
-                </span>
-              </h2>
-            </div>
+      <div className="site-gutter relative z-10 pb-10 pt-16 md:pt-[120px]">
+        <div className="site-container">
+          <div className="mb-[220px] grid grid-cols-1 items-start gap-6 md:mb-[260px] lg:grid-cols-2 lg:gap-12">
+            <SectionHeading bold="Trail notes" italic="Delivered" />
             <div className="flex flex-col">
-              <p className="font-manrope font-normal text-[16px] md:text-[20px] leading-[26px] md:leading-[32px] text-body opacity-80 mb-8 max-w-[500px]">
-                Subscribe and get every new trail note as soon as I&apos;m back from the mountain. 
-                Insights, stories and lessons from every hike.
+              <p className="body-standard mb-8 max-w-[500px]">
+                Subscribe and get every new trail note as soon as I&apos;m back from the mountain. Insights, stories and
+                lessons from every hike.
               </p>
-              
-              {/* Newsletter Form: Styled as a pill to match mobile UI */}
-              <form onSubmit={handleSubmit} className="relative w-full max-w-[480px]">
-                <div className="relative flex items-center p-1 border border-dark/20 rounded-full bg-white/10 backdrop-blur-[4px] transition-all focus-within:border-accent-green">
+
+              <form onSubmit={handleSubmit} noValidate className="relative w-full max-w-[480px]">
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
+                <div className="relative flex items-center rounded-full border border-body bg-white/30 p-1 backdrop-blur-[4px] transition-colors focus-within:border-accent-green">
                   <input
+                    id="newsletter-email"
                     type="email"
+                    autoComplete="email"
                     placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-grow bg-transparent px-5 md:px-6 py-3 font-inter font-normal text-[16px] md:text-[18px] text-dark placeholder:text-dark/40 outline-none w-full"
-                    aria-label="Email subscription"
+                    aria-invalid={!!error}
+                    aria-describedby="newsletter-help"
+                    className="w-full grow bg-transparent px-4 py-2.5 font-inter text-[16px] leading-[24px] text-dark outline-none placeholder:text-body/75 md:px-5 md:text-[18px]"
                   />
-                  
-                  <div className="group/btn relative">
-                    <button
-                      type="submit"
-                      disabled
-                      className="px-6 md:px-8 py-2.5 md:py-3 bg-primary rounded-full font-inter font-medium text-[16px] md:text-[18px] leading-[24px] text-offwhite transition-all cursor-not-allowed whitespace-nowrap"
-                    >
-                      Subscribe
-                    </button>
-                    <div className="absolute bottom-full right-0 mb-4 w-64 p-3 bg-dark text-offwhite text-[14px] leading-snug rounded-xl opacity-0 pointer-events-none group-hover/btn:opacity-100 transition-all duration-300 shadow-2xl z-50">
-                      Disabled for now but will be re enabled when emailing service is in place.
-                      <div className="absolute top-full right-8 w-3 h-3 bg-dark rotate-45 -translate-y-1.5"></div>
-                    </div>
-                  </div>
+                  <button
+                    type="submit"
+                    disabled
+                    aria-describedby="newsletter-help"
+                    className="cursor-not-allowed whitespace-nowrap rounded-full bg-accent-green px-5 py-2.5 font-inter text-[16px] font-medium leading-[24px] text-background opacity-90 md:px-7 md:text-[18px]"
+                  >
+                    Subscribe
+                  </button>
                 </div>
-                {error && <p className="absolute left-6 top-full mt-2 text-accent-red text-sm font-manrope">{error}</p>}
+                <p id="newsletter-help" role={error ? "alert" : undefined} className={`mt-3 pl-5 font-manrope text-sm ${error ? "text-accent-red" : "text-body/70"}`}>
+                  {error || "Subscriptions open soon. The email service is being set up."}
+                </p>
               </form>
             </div>
           </div>
 
-          {/* Footer Navigation & Branding: Centered on mobile as per design */}
-          <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-10 mb-8">
-            <nav className="flex flex-wrap justify-center gap-x-[32px] md:gap-x-[48px] gap-y-4">
-              {['Expeditions', 'Gallery', 'Trail Notes', 'Contact'].map((item) => (
-                <Link 
-                  key={item} 
-                  href={`#${item.toLowerCase().replace(' ', '-')}`}
-                  className="font-inter font-normal text-[16px] md:text-[18px] leading-[32.4px] text-offwhite/90 hover:text-accent-green transition-colors"
-                >
-                  {item}
-                </Link>
-              ))}
+          <div className="mb-6 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
+            <nav aria-label="Footer">
+              <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3 md:gap-x-12">
+                {NAV_LINKS.map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="footer-link transition-opacity hover:opacity-80">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </nav>
-            <div className="flex items-center gap-8">
-              <Link href="https://www.instagram.com/shotbynemwel/" className="text-offwhite/90 hover:text-accent-green transition-colors" aria-label="Instagram" target="_blank">
-                <Instagram size={24} />
+            <div className="flex items-center gap-6">
+              <Link href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-offwhite transition-opacity hover:opacity-80" aria-label="Instagram (opens in a new tab)">
+                <Instagram size={20} aria-hidden />
               </Link>
-              <Link href="https://www.tiktok.com/@shotsbynemwel" className="text-offwhite/90 hover:text-accent-green transition-colors" aria-label="TikTok" target="_blank">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+              <Link href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" className="text-offwhite transition-opacity hover:opacity-80" aria-label="TikTok (opens in a new tab)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z" />
                 </svg>
               </Link>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="w-full h-[1px] bg-offwhite/20 mb-8" />
+          <div className="mb-6 h-px w-full bg-border/90" />
 
-          {/* Attributions: Centered on mobile */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <p className="font-inter font-normal text-[14px] md:text-[18px] leading-[24px] md:leading-[32px] text-offwhite/70">
-              © {year} Shot by Nemwel, All Rights Reserved
-            </p>
-            <p className="font-inter font-normal text-[14px] md:text-[18px] leading-[24px] md:leading-[32px] text-offwhite/70">
-              Designed by <Link href="https://www.linkedin.com/in/rachaelngotho/" className="underline decoration-1 underline-offset-4" target="_blank">Rachael</Link>, Developed by <Link href="https://www.linkedin.com/in/nemwel-nyandoro/" className="underline decoration-1 underline-offset-4" target="_blank">Nemwel</Link>
+          <div className="flex flex-col items-center justify-between gap-2 text-center font-inter text-[14px] leading-[24px] text-offwhite md:flex-row md:text-left md:text-[16px] lg:text-[18px] lg:leading-[32px]">
+            <p>© {year} Shot by Nemwel, All Rights Reserved</p>
+            <p>
+              Designed by{" "}
+              <Link href="https://www.linkedin.com/in/rachaelngotho/" target="_blank" rel="noopener noreferrer" className="underline decoration-1 underline-offset-4">
+                Rachael
+              </Link>
+              , Developed by{" "}
+              <Link href="https://www.linkedin.com/in/nemwel-nyandoro/" target="_blank" rel="noopener noreferrer" className="underline decoration-1 underline-offset-4">
+                Nemwel
+              </Link>
             </p>
           </div>
         </div>
