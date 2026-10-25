@@ -1,0 +1,72 @@
+[
+  {
+    "id": "lenana-light",
+    "slug": "lenana-at-first-light",
+    "active": true,
+    "featured": true,
+    "order": 0,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-25T00:00:00.000Z",
+    "title": "Lenana at first light",
+    "location": "Mt Kenya, Kenya",
+    "altitude": "5,199m",
+    "size": "small",
+    "image": "gallery/LenanaAtFirstLight/lenanaatfirstlight.png"
+  },
+  {
+    "id": "edge-rift",
+    "slug": "edge-of-the-rift",
+    "active": true,
+    "featured": true,
+    "order": 1,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-25T00:00:00.000Z",
+    "title": "Edge of the Rift",
+    "location": "Rift Valley, Kenya",
+    "altitude": "4,321m",
+    "size": "small",
+    "image": "gallery/EdgeOfTheRift/edgeoftherift.png"
+  },
+  {
+    "id": "dawn-highest",
+    "slug": "dawn-at-africas-highest-peak",
+    "active": true,
+    "featured": true,
+    "order": 2,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-25T00:00:00.000Z",
+    "title": "Dawn at Africa's highest peak",
+    "location": "Kilimanjaro, Tanzania",
+    "altitude": "5,895m",
+    "size": "tall",
+    "image": "gallery/DawnAtAfricasHighestPeak/dawnatafricashighestpeak.png"
+  },
+  {
+    "id": "misty-rwenzori",
+    "slug": "misty-steps-on-rwenzori",
+    "active": true,
+    "featured": true,
+    "order": 3,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-25T00:00:00.000Z",
+    "title": "Misty steps on Rwenzori",
+    "location": "Mt Rwenzori, Uganda",
+    "altitude": "5,109m",
+    "size": "small",
+    "image": "gallery/MistyStepsOnRwenzori/mistystepsonrwenzori.png"
+  },
+  {
+    "id": "cloud-satima",
+    "slug": "cloud-trail-to-satima",
+    "active": true,
+    "featured": true,
+    "order": 4,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": "2026-10-25T00:00:00.000Z",
+    "title": "Cloud trail to Satima",
+    "location": "Aberdares, Kenya",
+    "altitude": "4,001m",
+    "size": "small",
+    "image": "gallery/CloudTrailToSatima/cloudtrailtosatima.png"
+  }
+]
