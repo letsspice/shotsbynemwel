@@ -14,15 +14,15 @@ const cormorant = Cormorant_Garamond({
 });
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-inter-family",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
 });
 
 const manrope = Manrope({
-  variable: "--font-manrope",
+  variable: "--font-manrope-family",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -81,6 +81,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#0F1115",
 };
 
 export default function RootLayout({
@@ -89,8 +90,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${cormorant.variable} ${inter.variable} ${manrope.variable} antialiased`}>
+    // Font variables live on <html> so the :root theme tokens in globals.css can resolve them.
+    <html lang="en" data-scroll-behavior="smooth" className={`${cormorant.variable} ${inter.variable} ${manrope.variable}`}>
+      <body className="antialiased">
+        <a href="#main" className="skip-link">
+          Skip to content
+        </a>
         {children}
       </body>
     </html>

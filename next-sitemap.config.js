@@ -4,6 +4,11 @@ module.exports = {
   generateRobotsTxt: true,
   sitemapSize: 7000,
   outDir: 'public',
+  // The admin lives at a secret path (ADMIN_SLUG) and is never listed.
+  exclude: ['/manage', '/manage/*', '/api/*', '/__not-found'],
+  robotsTxtOptions: {
+    policies: [{ userAgent: '*', allow: '/', disallow: ['/api/'] }],
+  },
   transform: async (config, url) => {
     // Keep defaults; can adjust priority for key sections
     return {

@@ -42,6 +42,18 @@ Her work shapes the visual direction, layout decisions, and overall feel of the 
 
 ---
 
+## Content Studio (admin)
+
+All expeditions, gallery photos and trail notes are JSON records managed from a private studio, so content can change without a redeploy.
+
+- **Where:** `/manage` in development. In production the studio is only reachable at `/<ADMIN_SLUG>` (see `.env.example`); without `ADMIN_SLUG` it is disabled.
+- **Storage:** `content/*.json` in development. Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` and the same reads/writes go to Upstash (empty keys fall back to the JSON seed).
+- **Images:** drop files into `public/assets/<folder>/...`, then pick the folder and file in the form. Records store the path relative to `public/assets`. Active records can't reference missing files.
+- **Fields:** forms are generated from `lib/content/collections.ts`. Add a field there and it becomes editable and validated.
+- **Metrics & export:** dashboard counts, missing/unused images, a printable PDF report and a JSON backup.
+
+---
+
 ## Status
 
 🚧 **Work in progress**

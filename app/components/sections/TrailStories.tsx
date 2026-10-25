@@ -1,103 +1,44 @@
-"use client";
+import type { TrailStory } from "@/lib/content/types";
+import ArrowLink from "@/app/components/ui/ArrowLink";
+import SectionHeading from "@/app/components/ui/SectionHeading";
+import StoryCard from "@/app/components/stories/StoryCard";
 
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { trailStories } from "@/app/data/trailStories";
-
-export default function TrailStories() {
-  // Only taking the first two stories for the homepage view
-  const featuredStories = trailStories.slice(0, 2);
+export default function TrailStories({ stories }: { stories: TrailStory[] }) {
+  if (!stories.length) return null;
+  const [first, ...rest] = stories;
 
   return (
-    <section id="trail-notes" className="bg-background pb-[70px] px-6 md:px-[100px] w-full overflow-hidden">
-      <div className="max-w-[1238px] mx-auto">
-        
-        {/* Header Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-[48px]">
-          <div className="max-w-[480px]">
-            <p className="font-manrope text-[20px] leading-[32px] text-body opacity-75 mb-[24px]">
-              Trail Notes is where everything settles for me. After I come down the mountain 
-              and my heartbeat slows, this is where my thoughts finally take shape.
+    <section id="trail-notes" aria-labelledby="trail-notes-heading" className="site-gutter scroll-mt-4 bg-background pb-[var(--spacing-section-y)]">
+      <div className="site-container">
+        {/* Mobile: heading first, then intro. Desktop: intro left, heading right. */}
+        <div className="mb-8 flex flex-col items-start justify-between gap-4 md:mb-12 lg:flex-row lg:gap-10">
+          <SectionHeading
+            id="trail-notes-heading"
+            bold="Stories from the"
+            italic="Trails"
+            className="lg:order-2 lg:max-w-[420px] lg:text-right"
+          />
+          <div className="max-w-[480px] lg:order-1">
+            <p className="body-standard mb-6">
+              Trail Notes is where everything settles for me. After I come down the mountain and my heartbeat slows, this
+              is where my thoughts finally take shape.
             </p>
-            <Link 
-              href="/blog" 
-              className="group inline-flex items-center transition-all duration-300"
-              style={{ gap: '18px' }}
-            >
-              <span className="font-inter font-semibold text-[18px] leading-[24px] text-accent-green">
-                Read More
-              </span>
-              <ArrowRight size={20} className="text-accent-green transition-transform group-hover:translate-x-2" />
-            </Link>
+            <ArrowLink href="/trail-notes">Read More</ArrowLink>
           </div>
-
-          <h2 className="lg:text-right">
-            <span className="subheading-bold text-dark block lg:inline text-[48px] leading-[60px] tracking-[-1.28%]">Stories from the </span>
-            <span className="subheading-italic text-dark block lg:inline text-[52px] leading-[64px] tracking-[0.2%]">Trails</span>
-          </h2>
         </div>
 
-        {/* Stories Grid: 3-column base for 2/3 and 1/3 split */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-          
-          {/* Left Block: 2/3 Width */}
-          <div className="md:col-span-2">
-            <StoryCard story={featuredStories[0]} />
+        {/* Tablet: equal columns. Desktop: the designer's 2/3 + 1/3 split. */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className={rest.length ? "lg:col-span-2" : "md:col-span-2 lg:col-span-3"}>
+            <StoryCard story={first} />
           </div>
-
-          {/* Right Block: 1/3 Width */}
-          <div className="md:col-span-1">
-            <StoryCard story={featuredStories[1]} />
-          </div>
-          
+          {rest.map((story) => (
+            <div key={story.id}>
+              <StoryCard story={story} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function StoryCard({ story }: { story: any }) {
-  return (
-    <Link 
-      href={`/blog/${story.slug}`}
-      onClick={(e) => e.preventDefault()}
-      aria-disabled="true"
-      className="relative w-full h-[400px] md:h-[480px] overflow-hidden rounded-[24px] group block"
-    >
-      {/* Featured Image */}
-      <Image
-        src={story.featuredImage}
-        alt={story.title}
-        fill
-        className="object-cover transition-transform duration-700 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
-      />
-
-      {/* Designer Gradient: 0% to 90% opacity black bottom fade */}
-      <div 
-        className="absolute inset-0 z-10 pointer-events-none"
-        style={{
-          background: "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%)"
-        }}
-      />
-
-      {/* Text Content Overlay */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-end p-[32px] md:p-[40px]">
-        <h3 
-          className="font-manrope font-medium text-offwhite mb-[8px]"
-          style={{ 
-            fontSize: '28px', 
-            lineHeight: '36px', 
-            letterSpacing: '-1.28%' 
-          }}
-        >
-          {story.title}
-        </h3>
-        <p className="font-manrope font-light text-[18px] leading-[32px] text-offwhite line-clamp-2 max-w-[95%]">
-          {story.excerpt}
-        </p>
-      </div>
-    </Link>
   );
 }
