@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type FocusEvent, type PointerEvent } from "react";
 import Image from "next/image";
-import { MapPin, Mountain } from "lucide-react";
+import { MapPin, Mountain, Pause, Play } from "lucide-react";
 import type { Expedition } from "@/lib/content/types";
 import { assetUrl } from "@/lib/assets";
 import ArrowLink from "@/app/components/ui/ArrowLink";
@@ -14,21 +14,87 @@ type TabExpedition = Pick<
   "id" | "slug" | "name" | "country" | "altitude" | "difficulty" | "description" | "heroImage" | "thumbnail"
 >;
 
+/** How long each expedition stays up before the carousel moves on. */
+const SLIDE_INTERVAL_MS = 6000;
+
+const reducedMotionQuery = "(prefers-reduced-motion: reduce)";
+
+function subscribeReducedMotion(onChange: () => void) {
+  const media = window.matchMedia(reducedMotionQuery);
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
+
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    subscribeReducedMotion,
+    () => window.matchMedia(reducedMotionQuery).matches,
+    // Assume reduced motion on the server so autoplay only starts once the client knows.
+    () => true,
+  );
+}
+
 /**
  * Designer: tab 1238×520, radius 24, gradient 40% #000 → #848484; selector thumbs 69.14px with a
  * 2.77px #F8F9FB border on the active one and a 16px gap; 24px between heading and tab.
+ *
+ * Auto-advances like the prototype. The progress line under the active thumbnail is a CSS animation whose
+ * end moves to the next slide, so pausing the animation (hover, keyboard focus, off-screen, the pause
+ * button) pauses the timer too. No autoplay when the visitor prefers reduced motion.
  */
 export default function MountainExpeditions({ expeditions }: { expeditions: TabExpedition[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [userPaused, setUserPaused] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const tabRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = tabRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.4 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   const expedition = expeditions[activeIndex];
   if (!expedition) return null;
 
+  const canAutoplay = expeditions.length > 1 && !prefersReducedMotion;
+  const isPlaying = canAutoplay && !userPaused && !isHovered && !hasFocus && isVisible;
+  const showNext = () => setActiveIndex((index) => (index + 1) % expeditions.length);
+
+  // Touch "hover" would otherwise pause the carousel until the visitor taps elsewhere.
+  const onPointerHover = (hovered: boolean) => (e: PointerEvent) => {
+    if (e.pointerType === "mouse") setIsHovered(hovered);
+  };
+  // Only keyboard focus pauses; a mouse click on a thumbnail should just restart the timer.
+  const onFocus = (e: FocusEvent<HTMLElement>) => {
+    if (e.target.matches(":focus-visible")) setHasFocus(true);
+  };
+  const onBlur = (e: FocusEvent<HTMLElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) setHasFocus(false);
+  };
+
   return (
-    <section id="expeditions" aria-labelledby="expeditions-heading" className="site-gutter scroll-mt-4 bg-background pb-[var(--spacing-section-y)]">
+    <section
+      id="expeditions"
+      aria-labelledby="expeditions-heading"
+      className="site-gutter scroll-mt-4 bg-background pb-[var(--spacing-section-y)]"
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
       <div className="site-container">
         <SectionHeading id="expeditions-heading" bold="Mountain" italic="Expeditions" align="right" className="mb-6" />
 
-        <div className="relative w-full overflow-hidden rounded-[16px] bg-dark md:rounded-tab">
+        <div
+          ref={tabRef}
+          onPointerEnter={onPointerHover(true)}
+          onPointerLeave={onPointerHover(false)}
+          className="relative w-full overflow-hidden rounded-[16px] bg-dark md:rounded-tab"
+        >
           <div className="relative min-h-[600px] w-full md:min-h-[520px]">
             {expeditions.map((item, index) => (
               <Image
@@ -50,7 +116,7 @@ export default function MountainExpeditions({ expeditions }: { expeditions: TabE
 
             <div
               className="relative z-10 flex min-h-[600px] flex-col justify-center px-5 pb-28 pt-10 md:min-h-[520px] md:px-[60px] md:pb-10"
-              aria-live="polite"
+              aria-live={isPlaying ? "off" : "polite"}
             >
               <h3 className="tab-title mb-3 text-offwhite">{expedition.name}</h3>
 
@@ -81,8 +147,18 @@ export default function MountainExpeditions({ expeditions }: { expeditions: TabE
               <div
                 role="group"
                 aria-label="Choose an expedition"
-                className="absolute bottom-5 left-5 z-20 flex gap-3 md:bottom-10 md:left-auto md:right-10 md:gap-4"
+                className="absolute bottom-5 left-5 z-20 flex items-center gap-3 md:bottom-10 md:left-auto md:right-10 md:gap-4"
               >
+                {canAutoplay && (
+                  <button
+                    type="button"
+                    onClick={() => setUserPaused((paused) => !paused)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-offwhite backdrop-blur-sm transition-colors hover:bg-black/55"
+                    aria-label={userPaused ? "Play slideshow" : "Pause slideshow"}
+                  >
+                    {userPaused ? <Play size={16} aria-hidden /> : <Pause size={16} aria-hidden />}
+                  </button>
+                )}
                 {expeditions.map((item, index) => (
                   <button
                     key={item.id}
@@ -95,6 +171,15 @@ export default function MountainExpeditions({ expeditions }: { expeditions: TabE
                     aria-pressed={index === activeIndex}
                   >
                     <Image src={assetUrl(item.thumbnail)} alt="" fill className="object-cover" sizes="70px" />
+                    {canAutoplay && index === activeIndex && (
+                      <span className="absolute inset-x-1.5 bottom-1.5 h-[3px] overflow-hidden rounded-full bg-offwhite/35" aria-hidden>
+                        <span
+                          className="carousel-progress block h-full w-full rounded-full bg-offwhite"
+                          style={{ ["--carousel-interval" as string]: `${SLIDE_INTERVAL_MS}ms`, animationPlayState: isPlaying ? "running" : "paused" }}
+                          onAnimationEnd={showNext}
+                        />
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>
