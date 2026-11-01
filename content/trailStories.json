@@ -12,9 +12,12 @@
     "category": "Mountain Stories",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/SurvivingAStormOnKilimanjaro/SurvivingAStormOnKilimanjaro.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   },
   {
     "id": "hidden-waterfalls",
@@ -29,9 +32,12 @@
     "category": "Discovery",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/HiddenWaterfalls/HiddenWaterfalls.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   },
   {
     "id": "satima-clouds",
@@ -46,9 +52,12 @@
     "category": "Moorlands",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/Satima/Satima.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   },
   {
     "id": "mackinders-camp",
@@ -63,9 +72,12 @@
     "category": "Basecamp",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/MackindersCamp/MackindersCamp.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   },
   {
     "id": "rurimeria-hills",
@@ -80,9 +92,12 @@
     "category": "Endurance",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/RurimeriaHills/RurimeriaHills.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   },
   {
     "id": "elephant-hill",
@@ -97,8 +112,11 @@
     "category": "Day Hikes",
     "date": "",
     "readTime": "",
+    "location": "",
+    "terrain": "",
     "featuredImage": "storiesFromTheTrails/ElephantHill/ElephantHill.png",
+    "imageCaption": "",
     "body": [],
-    "images": []
+    "signOff": ""
   }
 ]
