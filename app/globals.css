@@ -113,7 +113,6 @@ body {
   font-style: italic;
   font-size: 24px;
   line-height: 25px;
-  color: var(--color-offwhite);
 }
 
 .nav-item {
@@ -121,7 +120,6 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 32px;
-  color: var(--color-offwhite);
 }
 
 /* Hero headings: 34px mobile → 60px tablet → 80px desktop (designer: 80/80) */
@@ -319,6 +317,29 @@ body {
     transparent 98%,
     #000 100%
   );
+}
+
+/* Trail note body: drop cap on the opening paragraph */
+.drop-cap::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-size: 3.1em;
+  line-height: 0.8;
+}
+
+/* Expedition carousel: progress line under the active thumbnail; its end advances the slide */
+@keyframes carousel-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.carousel-progress {
+  transform-origin: left;
+  animation: carousel-progress var(--carousel-interval, 6s) linear forwards;
 }
 
 /* Footer */

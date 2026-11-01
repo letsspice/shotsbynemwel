@@ -47,7 +47,7 @@ export default async function ExpeditionPage({ params }: Props) {
       value: expedition.highestPoint ? `Highest Point – ${expedition.highestPoint}` : expedition.altitude,
     },
     { icon: MapPin, label: "Route", value: expedition.route },
-    { icon: CalendarDays, label: "When", value: [expedition.duration, expedition.dateLabel].filter(Boolean).join(", ") },
+    { icon: CalendarDays, label: "When", value: expedition.dateLabel || expedition.duration },
   ].filter((s) => s.value);
 
   return (
@@ -101,20 +101,18 @@ export default async function ExpeditionPage({ params }: Props) {
 
           {expedition.itinerary.length > 0 && (
             <section aria-labelledby="itinerary-heading" className="mb-16 md:mb-24">
-              <SectionHeading id="itinerary-heading" bold="The" italic="Itinerary" tone="sage" className="mb-8 md:mb-10" />
-              <ol className="space-y-8 md:space-y-10">
-                {expedition.itinerary.map((day, i) => (
-                  <li key={i} className="grid grid-cols-1 gap-2 md:grid-cols-[200px_1fr] md:gap-10">
-                    <div>
-                      <p className="font-manrope text-[16px] font-medium leading-[24px] text-primary/80 md:text-[18px]">{day.day}:</p>
-                      {day.elevation && <p className="font-serif text-[16px] leading-[24px] text-primary/70">{day.elevation}</p>}
-                    </div>
-                    <div>
-                      <h3 className="mb-2 font-serif text-[22px] font-medium leading-[28px] text-dark md:text-[24px] md:leading-[32px]">{day.title}</h3>
-                      {day.body && <p className="font-inter text-[15px] leading-[25px] text-body/75 md:text-[16px] md:leading-[26px]">{day.body}</p>}
-                    </div>
-                  </li>
-                ))}
+              <SectionHeading id="itinerary-heading" bold="The" italic="Itinerary" className="mb-6 md:mb-8" />
+              <ol className="max-w-[1040px] space-y-6 md:space-y-8">
+                {expedition.itinerary.map((stage, i) => {
+                  const meta = [stage.day, stage.elevation].filter(Boolean).join(" · ");
+                  return (
+                    <li key={i}>
+                      <h3 className="mb-1.5 font-manrope text-[18px] font-semibold leading-[26px] text-dark md:text-[20px] md:leading-[28px]">{stage.title}</h3>
+                      {meta && <p className="mb-1.5 font-serif text-[16px] italic leading-[24px] text-primary/70">{meta}</p>}
+                      {stage.body && <p className="font-inter text-[15px] leading-[25px] text-body/75 md:text-[16px] md:leading-[26px]">{stage.body}</p>}
+                    </li>
+                  );
+                })}
               </ol>
             </section>
           )}

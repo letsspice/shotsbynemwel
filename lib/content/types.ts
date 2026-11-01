@@ -20,6 +20,7 @@ export interface BaseRecord {
 }
 
 export interface ItineraryDay {
+  /** Optional label such as "Day 1"; stages can be named by their title alone. */
   day: string;
   title: string;
   elevation: string;
@@ -46,7 +47,7 @@ export interface Expedition extends BaseRecord {
   summary: string;
   intro: string[];
   itinerary: ItineraryDay[];
-  /** Italic note shown under "Selected Frames". */
+  /** Italic note in the sign-off under "Selected Shots". */
   fieldNote: string;
   heroImage: string;
   heroCaption: string;
@@ -58,6 +59,8 @@ export interface GalleryItem extends BaseRecord {
   title: string;
   location: string;
   altitude: string;
+  /** Short caption under the photo on the gallery page. */
+  description: string;
   image: string;
   size: "small" | "tall";
 }
@@ -69,9 +72,17 @@ export interface TrailStory extends BaseRecord {
   /** ISO date (YYYY-MM-DD). */
   date: string;
   readTime: string;
+  /** "Where" in the note's sidebar, e.g. "Mount Kenya, Kenya". */
+  location: string;
+  /** "Terrain" in the note's sidebar, e.g. "Moorland, rock & cloud". */
+  terrain: string;
   featuredImage: string;
+  /** Italic caption under the featured image on the Trail Notes page. */
+  imageCaption: string;
+  /** Paragraphs; a paragraph starting with "## " renders as a subheading. */
   body: string[];
-  images: string[];
+  /** Italic closing line, e.g. "Until the next questionable idea, Nemwel". */
+  signOff: string;
 }
 
 export interface CollectionMap {
