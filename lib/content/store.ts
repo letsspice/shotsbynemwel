@@ -10,6 +10,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import type { AnyRecord, CollectionKey, CollectionMap } from "./types";
+import { collections, emptyRecord } from "./collections";
 import expeditionsSeed from "@/content/expeditions.json";
 import gallerySeed from "@/content/gallery.json";
 import trailStoriesSeed from "@/content/trailStories.json";
@@ -96,7 +97,9 @@ export function getStore(): ContentStore {
 
 export async function readCollection<K extends CollectionKey>(collection: K): Promise<CollectionMap[K][]> {
   const records = await getStore().read(collection);
-  return [...records].sort((a, b) => a.order - b.order);
+  // Records saved before a field existed get its empty value, so pages and the admin form never see undefined.
+  const defaults = emptyRecord(collections[collection]);
+  return records.map((record) => ({ ...defaults, ...record }) as CollectionMap[K]).sort((a, b) => a.order - b.order);
 }
 
 export async function writeCollection<K extends CollectionKey>(collection: K, records: CollectionMap[K][]) {
