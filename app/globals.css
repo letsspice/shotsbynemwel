@@ -303,28 +303,45 @@ body {
   margin-top: 1em;
 }
 
-/* Expedition card: image with a circular notch cut out of the bottom-right corner */
-.notched-image {
-  --notch: 38px;
-  --notch-gap: 8px;
-  -webkit-mask: radial-gradient(
-    circle calc(var(--notch) + var(--notch-gap)) at calc(100% - var(--notch)) calc(100% - var(--notch)),
-    transparent 98%,
-    #000 100%
-  );
-  mask: radial-gradient(
-    circle calc(var(--notch) + var(--notch-gap)) at calc(100% - var(--notch)) calc(100% - var(--notch)),
-    transparent 98%,
-    #000 100%
-  );
+/*
+ * Expedition card: a rounded rectangle cut out of the image's bottom-right corner, holding the
+ * arrow button. Painted with the page background: the box itself plus two convex corners where
+ * the image edges turn into the cut-out.
+ */
+.card-notch {
+  --notch-w: 85px;
+  --notch-h: 93px;
+  --notch-r: 24px;
+  /* Sits outside the clipped image and 1px past its edges so no image pixels peek through. */
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: calc(var(--notch-w) + 1px);
+  height: calc(var(--notch-h) + 1px);
+  background: var(--background);
+  border-top-left-radius: var(--notch-r);
+}
+.card-notch::before,
+.card-notch::after {
+  content: "";
+  position: absolute;
+  width: var(--notch-r);
+  height: var(--notch-r);
+  background: radial-gradient(circle at 0 0, transparent calc(var(--notch-r) - 0.5px), var(--background) var(--notch-r));
+}
+.card-notch::before {
+  right: 1px;
+  bottom: 100%;
+}
+.card-notch::after {
+  right: 100%;
+  bottom: 1px;
 }
 
-/* Trail note body: drop cap on the opening paragraph */
+/* Trail note body: raised initial on the opening paragraph (twice the size, sitting on the first line) */
 .drop-cap::first-letter {
-  float: left;
-  margin: 0.08em 0.12em 0 0;
-  font-size: 3.1em;
-  line-height: 0.8;
+  font-size: 2em;
+  line-height: 0.5;
 }
 
 /* Expedition carousel: progress line under the active thumbnail; its end advances the slide */

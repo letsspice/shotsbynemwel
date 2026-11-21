@@ -18,18 +18,20 @@ export default function TrailStories({ stories }: { stories: TrailStory[] }) {
             italic="Trails"
             className="lg:order-2 lg:max-w-[420px] lg:text-right"
           />
-          <div className="max-w-[480px] lg:order-1">
-            <p className="body-standard mb-6">
+          <div className="max-w-[500px] lg:order-1">
+            <p className="body-standard mb-8 md:mb-12">
               Trail Notes is where everything settles for me. After I come down the mountain and my heartbeat slows, this
-              is where my thoughts finally take shape.
+              is where my thoughts finally take shape. It&apos;s where I write what the trail taught me.
             </p>
-            <ArrowLink href="/trail-notes">Read More</ArrowLink>
+            <ArrowLink href="/trail-notes" tone="primary">
+              Read More
+            </ArrowLink>
           </div>
         </div>
 
-        {/* Tablet: equal columns. Desktop: the designer's 2/3 + 1/3 split. */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className={rest.length ? "lg:col-span-2" : "md:col-span-2 lg:col-span-3"}>
+        {/* Tablet: equal columns. Desktop: the designer's wide + narrow split (783 / 415). */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-[783fr_415fr] lg:gap-10">
+          <div className={rest.length ? "" : "md:col-span-2"}>
             <StoryCard story={first} />
           </div>
           {rest.map((story) => (

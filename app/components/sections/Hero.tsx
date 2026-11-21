@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import heroImage from "@/app/assets/hero/shotbynemwel-hero.png";
 import SiteHeader from "@/app/components/layout/SiteHeader";
 
@@ -39,7 +39,7 @@ export default function Hero() {
               className="btn-primary inline-flex items-center gap-[18px] rounded-md px-6 py-3 transition-transform hover:scale-[1.02] focus-visible:outline-offwhite"
             >
               View Expeditions
-              <ArrowRight size={20} aria-hidden />
+              <MoveRight size={26} strokeWidth={1.5} aria-hidden />
             </Link>
           </div>
         </div>
