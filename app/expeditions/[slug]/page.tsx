@@ -67,23 +67,17 @@ export default async function ExpeditionPage({ params }: Props) {
           }),
         }}
       />
-      <PageHero
-        image={assetUrl(expedition.heroImage)}
-        imageAlt={expedition.heroCaption || expedition.name}
-        title={expedition.name}
-        size="short"
-        titleFont="sans"
-      />
+      <PageHero image={assetUrl(expedition.heroImage)} imageAlt={expedition.heroCaption || expedition.name} title={expedition.headline || expedition.name} />
 
-      <main id="main" className="section-pad">
+      <main id="main" className="site-gutter pb-16 pt-12 md:pb-24 md:pt-[67px]">
         <div className="site-container">
           {stats.length > 0 && (
-            <dl className="mb-12 grid grid-cols-1 gap-6 border-b border-border pb-10 sm:grid-cols-3 md:mb-16">
+            <dl className="mb-12 flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:justify-around md:mb-[72px]">
               {stats.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex flex-col items-center gap-2 text-center">
-                  <Icon size={20} className="text-primary/70" aria-hidden />
+                <div key={label} className="flex flex-col items-center gap-4 text-center">
+                  <Icon size={24} strokeWidth={1.5} className="text-primary/80" aria-hidden />
                   <dt className="sr-only">{label}</dt>
-                  <dd className="font-manrope text-[16px] leading-[24px] text-body md:text-[18px] md:leading-[28px]">
+                  <dd className="font-manrope text-[18px] leading-[28px] text-primary/80 md:text-[20px] md:leading-[32px]">
                     {value}
                   </dd>
                 </div>
@@ -92,7 +86,7 @@ export default async function ExpeditionPage({ params }: Props) {
           )}
 
           {expedition.intro.length > 0 && (
-            <div className="prose-trail mb-14 max-w-[1040px] font-manrope text-[16px] leading-[26px] text-body/80 md:mb-20 md:text-[18px] md:leading-[29px]">
+            <div className="prose-trail mb-10 font-manrope text-[18px] leading-[30px] text-body/80 md:mb-12 md:text-[20px] md:leading-[34px]">
               {expedition.intro.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -100,16 +94,16 @@ export default async function ExpeditionPage({ params }: Props) {
           )}
 
           {expedition.itinerary.length > 0 && (
-            <section aria-labelledby="itinerary-heading" className="mb-16 md:mb-24">
+            <section aria-labelledby="itinerary-heading" className="mb-16 md:mb-[72px]">
               <SectionHeading id="itinerary-heading" bold="The" italic="Itinerary" className="mb-6 md:mb-8" />
-              <ol className="max-w-[1040px] space-y-6 md:space-y-8">
+              <ol className="space-y-6 md:space-y-7">
                 {expedition.itinerary.map((stage, i) => {
                   const meta = [stage.day, stage.elevation].filter(Boolean).join(" · ");
                   return (
                     <li key={i}>
-                      <h3 className="mb-1.5 font-manrope text-[18px] font-semibold leading-[26px] text-dark md:text-[20px] md:leading-[28px]">{stage.title}</h3>
-                      {meta && <p className="mb-1.5 font-serif text-[16px] italic leading-[24px] text-primary/70">{meta}</p>}
-                      {stage.body && <p className="font-inter text-[15px] leading-[25px] text-body/75 md:text-[16px] md:leading-[26px]">{stage.body}</p>}
+                      <h3 className="mb-2 font-manrope text-[20px] font-semibold leading-[28px] text-dark md:text-[24px] md:leading-[32px]">{stage.title}</h3>
+                      {meta && <p className="mb-2 font-serif text-[16px] italic leading-[24px] text-primary/70">{meta}</p>}
+                      {stage.body && <p className="font-manrope text-[18px] leading-[30px] text-body/75 md:text-[20px] md:leading-[34px]">{stage.body}</p>}
                     </li>
                   );
                 })}
