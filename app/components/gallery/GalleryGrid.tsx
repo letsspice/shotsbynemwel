@@ -20,7 +20,7 @@ export default function GalleryGrid({
   const Heading = headingLevel;
   const desktop =
     layout === "feature"
-      ? "lg:grid-cols-none lg:grid-flow-col-dense lg:auto-cols-fr lg:grid-rows-[300px_300px]"
+      ? "lg:grid-cols-[340fr_478fr_340fr] lg:grid-flow-col-dense lg:grid-rows-[313px_313px] lg:gap-x-10 lg:gap-y-[50px]"
       : "lg:grid-cols-3 lg:auto-rows-[300px] lg:grid-flow-row-dense";
   return (
     <ul className={`grid grid-cols-1 gap-4 sm:grid-cols-2 sm:auto-rows-[260px] sm:grid-flow-row-dense md:gap-6 ${desktop}`}>
