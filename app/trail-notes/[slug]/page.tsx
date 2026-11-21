@@ -12,14 +12,6 @@ export const revalidate = 300;
 
 type Props = { params: Promise<{ slug: string }> };
 
-function formatDate(iso: string) {
-  if (!iso) return "";
-  const date = new Date(`${iso}T00:00:00Z`);
-  return Number.isNaN(date.getTime())
-    ? ""
-    : date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
-}
-
 export async function generateStaticParams() {
   const stories = await getPublished("trailStories");
   return stories.map((s) => ({ slug: s.slug }));
@@ -56,8 +48,6 @@ export default async function TrailNotePage({ params }: Props) {
   const details = [
     { label: "Where", value: story.location },
     { label: "Terrain", value: story.terrain },
-    { label: "When", value: formatDate(story.date) },
-    { label: "Read", value: story.readTime },
   ].filter((d) => d.value);
 
   // Until a note has a body, its excerpt stands in as the opening paragraph.
@@ -92,35 +82,35 @@ export default async function TrailNotePage({ params }: Props) {
 
       <main id="main" className="site-gutter pb-16 pt-6 md:pb-24 md:pt-10">
         <article className="site-container">
-          <h1 className="mx-auto mb-10 max-w-[900px] text-center font-serif text-[40px] font-bold leading-[1.1] text-dark md:mb-16 md:text-[60px]">
+          <h1 className="mx-auto mb-10 max-w-[1000px] text-center font-serif text-[40px] font-bold leading-[1.1] text-dark md:mb-[100px] md:text-[60px] xl:text-[72px]">
             {story.title}
           </h1>
 
-          <div className={details.length ? "grid grid-cols-1 gap-8 lg:grid-cols-[240px_1fr] lg:gap-16 xl:gap-24" : "mx-auto max-w-[760px]"}>
+          <div className={details.length ? "grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr] lg:gap-16 xl:gap-[100px]" : "mx-auto max-w-[880px]"}>
             {details.length > 0 && (
-              <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-border py-5 sm:grid-cols-4 lg:grid-cols-1 lg:self-start lg:border-y-0 lg:py-0">
+              <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-y border-border py-5 lg:grid-cols-1 lg:self-start lg:border-y-0 lg:py-0">
                 {details.map(({ label, value }) => (
                   <div key={label} className="lg:border-b lg:border-border lg:pb-4">
-                    <dt className="font-manrope text-[14px] font-semibold leading-[22px] text-dark md:text-[15px]">{label}</dt>
-                    <dd className="font-manrope text-[14px] leading-[22px] text-body/80 md:text-[15px]">{value}</dd>
+                    <dt className="font-manrope text-[16px] font-semibold leading-[28px] text-dark md:text-[18px] md:leading-[32px]">{label}</dt>
+                    <dd className="font-manrope text-[16px] leading-[28px] text-body/80 md:text-[18px] md:leading-[32px]">{value}</dd>
                   </div>
                 ))}
               </dl>
             )}
 
-            <div className="max-w-[760px]">
-              <div className="font-manrope text-[16px] leading-[28px] text-body/80 md:text-[17px] md:leading-[29px]">
+            <div className="max-w-[880px]">
+              <div className="font-manrope text-[17px] leading-[28px] text-body/75 md:text-[20px] md:leading-[32px]">
                 {blocks.map((block, i) =>
                   block.kind === "heading" ? (
-                    <h2 key={i} className="mb-3 mt-8 font-manrope text-[20px] font-semibold leading-[28px] text-dark md:text-[22px] md:leading-[30px]">
+                    <h2 key={i} className="mb-5 mt-8 font-manrope text-[22px] font-medium leading-[30px] text-dark md:text-[28px] md:leading-[36px]">
                       {block.text}
                     </h2>
                   ) : i === leadIndex ? (
-                    <p key={i} className="drop-cap mb-6 font-serif text-[22px] leading-[32px] text-dark md:text-[26px] md:leading-[36px]">
+                    <p key={i} className="drop-cap mb-6 font-serif text-[24px] leading-[34px] text-dark md:text-[30px] md:leading-[42px]">
                       {block.text}
                     </p>
                   ) : (
-                    <p key={i} className="mb-4">
+                    <p key={i} className="mb-6">
                       {block.text}
                     </p>
                   ),
@@ -128,23 +118,23 @@ export default async function TrailNotePage({ params }: Props) {
               </div>
 
               {story.signOff && (
-                <p className="mt-10 text-right font-serif text-[20px] italic leading-[28px] text-primary/80 md:text-[22px]">{story.signOff}</p>
+                <p className="mt-10 text-right font-serif text-[24px] italic leading-[32px] text-primary/80 md:mt-11 md:text-[32px] md:leading-[40px]">{story.signOff}</p>
               )}
             </div>
           </div>
         </article>
 
-        <section aria-labelledby="more-notes-heading" className="site-container mt-16 md:mt-24">
-          <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <h2 id="more-notes-heading" className="font-manrope text-[24px] font-medium leading-[32px] text-dark md:text-[32px] md:leading-[40px]">
+        <section aria-labelledby="more-notes-heading" className="site-container mt-16 md:mt-[84px]">
+          <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between md:mb-[76px]">
+            <h2 id="more-notes-heading" className="font-manrope text-[28px] font-medium leading-[36px] tracking-[-0.0128em] text-dark md:text-[40px] md:leading-[48px]">
               While the boots dry,
             </h2>
-            <ArrowLink href="/trail-notes" size="sm" tone="primary">
+            <ArrowLink href="/trail-notes" size="md" tone="primary">
               Back to all trail notes
             </ArrowLink>
           </div>
           {related.length > 0 && (
-            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
+            <ul className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-[60px]">
               {related.map((note) => (
                 <li key={note.id}>
                   <TrailNoteTeaser story={note} variant="card" imageSide="left" headingLevel="h3" />
