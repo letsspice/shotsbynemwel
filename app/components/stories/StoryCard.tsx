@@ -7,7 +7,7 @@ import { assetUrl } from "@/lib/assets";
 export default function StoryCard({
   story,
   headingLevel = "h3",
-  height = "h-[400px] md:h-[480px]",
+  height = "h-[400px] md:h-[415px]",
 }: {
   story: TrailStory;
   headingLevel?: "h2" | "h3";
@@ -28,8 +28,7 @@ export default function StoryCard({
         style={{ background: "linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.9) 100%)" }}
         aria-hidden
       />
-      <div className="absolute inset-x-0 bottom-0 p-6 md:p-10">
-        {story.category && <p className="eyebrow mb-3 text-offwhite/80">{story.category}</p>}
+      <div className="absolute inset-x-0 bottom-0 p-6 md:px-7 md:pb-12">
         <Heading className="mb-2 font-manrope text-[24px] font-medium leading-[32px] tracking-[-0.0128em] text-offwhite md:text-[28px] md:leading-[36px]">
           {story.title}
         </Heading>
