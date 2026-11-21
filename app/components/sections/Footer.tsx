@@ -12,7 +12,7 @@ const smallText = "font-inter text-[14px] leading-[24px] text-offwhite md:text-[
 
 /**
  * Designer: heading 48/60 + 52/64, paragraph Manrope 20/32 #222 at 75%, input 1px #222 border with
- * Inter 18/24 text at 75%, button #5C934E with Inter medium 18/24 #F8F9FB, links Inter 18/32.4,
+ * Inter 16/24 text at 75%, button #34542C with Inter medium 18/24 #F8F9FB, links Inter 18/32.4,
  * social icons 20×20, divider 1px #E5E7EB at 90%, attributions Inter 18/32.
  *
  * Variants: "full" (newsletter + links), "compact" (links only, Contact page) and
@@ -22,12 +22,12 @@ export default function Footer({ variant = "full" }: { variant?: "full" | "compa
   return (
     <footer className="relative w-full overflow-hidden bg-background">
       <div className="absolute inset-0 z-0" aria-hidden>
-        <Image src="/assets/footer/mountain-footer-bg.png" alt="" fill className="object-cover object-bottom" sizes="100vw" />
+        <Image src="/assets/footer/mountain-footer-bg.png" alt="" fill className="object-cover object-top" sizes="100vw" />
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(180deg, #F8F9FB 0%, #F8F9FB 22%, rgba(248,249,251,0.85) 40%, rgba(248,249,251,0.35) 58%, rgba(248,249,251,0) 72%)",
+              "linear-gradient(180deg, #F8F9FB 0%, #F8F9FB 18%, rgba(248,249,251,0.9) 34%, rgba(248,249,251,0.7) 52%, rgba(248,249,251,0.45) 68%, rgba(248,249,251,0.22) 82%, rgba(248,249,251,0.08) 92%)",
           }}
         />
         <div
@@ -61,19 +61,19 @@ function Newsletter() {
   };
 
   return (
-    <div className="mb-[220px] grid grid-cols-1 items-start gap-6 md:mb-[260px] lg:grid-cols-2 lg:gap-12">
+    <div className="mb-[220px] grid grid-cols-1 items-start gap-6 md:mb-[260px] lg:grid-cols-[minmax(0,1fr)_534px] lg:gap-12">
       <SectionHeading bold="Trail notes" italic="Delivered" />
       <div className="flex flex-col">
-        <p className="body-standard mb-8 max-w-[500px]">
+        <p className="body-standard mb-8">
           Subscribe and get every new trail note as soon as I&apos;m back from the mountain. Insights, stories and
           lessons from every hike.
         </p>
 
-        <form onSubmit={handleSubmit} noValidate className="relative w-full max-w-[480px]">
+        <form onSubmit={handleSubmit} noValidate className="relative w-full">
           <label htmlFor="newsletter-email" className="sr-only">
             Email address
           </label>
-          <div className="relative flex items-center rounded-full border border-body bg-white/30 p-1 backdrop-blur-[4px] transition-colors focus-within:border-accent-green">
+          <div className="relative flex items-center rounded-full border border-body bg-white/30 backdrop-blur-[4px] transition-colors focus-within:border-primary">
             <input
               id="newsletter-email"
               type="email"
@@ -83,13 +83,13 @@ function Newsletter() {
               onChange={(e) => setEmail(e.target.value)}
               aria-invalid={!!error}
               aria-describedby="newsletter-help"
-              className="w-full grow bg-transparent px-4 py-2.5 font-inter text-[16px] leading-[24px] text-dark outline-none placeholder:text-body/75 md:px-5 md:text-[18px]"
+              className="w-full grow bg-transparent px-3 py-2.5 font-inter text-[16px] leading-[24px] text-dark outline-none placeholder:text-body/75"
             />
             <button
               type="submit"
               disabled
               aria-describedby="newsletter-help"
-              className="cursor-not-allowed whitespace-nowrap rounded-full bg-accent-green px-5 py-2.5 font-inter text-[16px] font-medium leading-[24px] text-background opacity-90 md:px-7 md:text-[18px]"
+              className="-my-px -mr-px cursor-not-allowed whitespace-nowrap rounded-full bg-primary px-6 py-3 font-inter text-[16px] font-medium leading-[24px] text-background md:text-[18px]"
             >
               Subscribe
             </button>
@@ -108,7 +108,7 @@ function FooterLinks() {
     <>
       <div className="mb-6 flex flex-col items-center justify-between gap-8 md:flex-row md:items-end">
         <nav aria-label="Footer">
-          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3 md:gap-x-12">
+          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-3 md:gap-x-12 lg:gap-x-16">
             {NAV_LINKS.map((item) => (
               <li key={item.label}>
                 <Link href={item.href} className="footer-link transition-opacity hover:opacity-80">
