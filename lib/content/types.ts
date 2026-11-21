@@ -29,6 +29,8 @@ export interface ItineraryDay {
 
 export interface Expedition extends BaseRecord {
   name: string;
+  /** Page title on the expedition page, e.g. "Conquering Mt. Kenya". Falls back to the name. */
+  headline: string;
   country: string;
   /** Short green subtitle on listing cards, e.g. "Satima & the moorlands". */
   region: string;

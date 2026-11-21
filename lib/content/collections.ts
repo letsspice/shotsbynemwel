@@ -68,6 +68,7 @@ export const collections: Record<CollectionKey, CollectionDef> = {
         title: "Basics",
         fields: [
           { name: "name", label: "Name", type: "text", required: true, maxLength: 80, placeholder: "Mount Kenya" },
+          { name: "headline", label: "Page title", type: "text", maxLength: 80, placeholder: "Conquering Mt. Kenya", help: "Optional. Shown as the title on the expedition page instead of the name." },
           { name: "country", label: "Country", type: "text", required: true, maxLength: 40, placeholder: "Kenya" },
           { name: "region", label: "Region subtitle", type: "text", maxLength: 80, placeholder: "Satima & the moorlands", help: "Green subtitle on listing cards." },
           { name: "altitude", label: "Altitude", type: "text", required: true, maxLength: 20, placeholder: "5,199m" },
